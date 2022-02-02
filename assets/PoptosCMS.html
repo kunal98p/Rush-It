@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Admin</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="css/mdb.min.css" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link href="css/style.css" rel="stylesheet">
+
+  <script src="https://www.gstatic.com/firebasejs/5.5.0/firebase.js"></script>
+  <!-- <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  </script>
+  <style>
+
+    /* Include the padding and border in an element's total width and height */
+* {
+  box-sizing: border-box;
+}
+
+/* Remove margins and padding from the list */
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+/* Style the list items */
+ul li {
+  cursor: pointer;
+  position: relative;
+  padding: 12px 8px 12px 40px;
+  list-style-type: none;
+  background: #eee;
+  font-size: 18px;
+  transition: 0.2s;
+  
+  /* make the list items unselectable */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border-radius: 7px;
+  margin-left: 3%;
+  margin-right: 3%;
+  margin-top: 0.5%;
+  opacity: 0.8;
+
+}
+
+/* Set all odd list items to a different color (zebra-stripes) */
+ul li:nth-child(odd) {
+  background: #f9f9f9;
+}
+
+/* Darker background-color on hover */
+ul li:hover {
+  background: #ddd;
+}
+
+/* When clicked on, add a background color and strike out text */
+ul li.checked {
+  background: #888;
+  color: #fff;
+  text-decoration: line-through;
+}
+
+/* Add a "checked" mark when clicked on */
+ul li.checked::before {
+  content: '';
+  position: absolute;
+  border-color: #fff;
+  border-style: solid;
+  border-width: 0 2px 2px 0;
+  top: 10px;
+  left: 16px;
+  transform: rotate(45deg);
+  height: 15px;
+  width: 7px;
+
+
+}
+
+/* Style the close button */
+.close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 12px 16px 12px 16px;
+}
+
+.close:hover {
+  background-color: #f44336;
+  color: white;
+}
+
+/* Style the header */
+.header {
+  background-color: #000022;
+  padding: 30px 40px;
+  color: white;
+  text-align: center;
+  border-radius: 10px;
+  margin-left: 3%;
+  margin-right: 3%;
+}
+
+/* Clear floats after the header */
+.header:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the input */
+input {
+  margin: 0;
+  border: none;
+
+  width: 35%;
+  padding: 10px;
+  float: left;
+  font-size: 16px;
+  border-radius: 3px;
+  margin-right: 2%;
+}
+
+/* Style the "Add" button */
+.addBtn {
+  padding: 10px;
+  width: 20%;
+  background: #d9d9d9;
+  color: #555;
+  float: left;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 3px;
+}
+
+.addBtn:hover {
+  background-color: #bbb;
+}
+
+.addBtn1 {
+  padding: 5px;
+  background: #d9d9d9;
+  color: #555;
+  float: left;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 25px;
+  width: 100px;
+}
+
+.addBtn1:hover {
+  background-color: #bbb;
+}
+
+.gradient {
+      background: -moz-linear-gradient(45deg, rgba(42, 27, 161, 0.5), rgba(29, 210, 177, 0.5) 100%);
+      background: -webkit-linear-gradient(45deg, rgba(42, 27, 161, 0.5), rgba(29, 210, 177, 0.5) 100%);
+      background: -webkit-gradient(linear, 45deg, from(rgba(42, 27, 161, 0.5)), to(rgba(29, 210, 177, 0.5)));
+      background: -o-linear-gradient(45deg, rgba(42, 27, 161, 0.5), rgba(29, 210, 177, 0.5) 100%);
+      background: linear-gradient(to 45deg, rgba(42, 27, 161, 0.5), rgba(29, 210, 177, 0.5) 100%);
+   }
+
+   .footer {
+   position: fixed;
+   right: 2%;
+   bottom: 0;
+
+   background-color: #000022;
+   color: white;
+   text-align: center;
+   width: 10%
+}
+
+   .footer1 {
+   position: fixed;
+   left: 10px;
+   bottom: 0;
+
+
+   color: white;
+   text-align: center;
+   width: 10%
+}
+pre{
+      background: #f9f9f9;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      border-radius: 5px;
+      width: 80%; 
+    }
+
+
+.rectangle1 {
+  height: 150px;
+  width: 200px;
+  background-color:   #404040;
+  border-radius: 7px;
+  opacity: 0.85;
+}
+
+.rectangle2 {
+  height: 150px;
+  width: 350px;
+  background-color:   #404040;
+  border-radius: 7px;
+   opacity: 0.85;
+}
+
+.rectangle3 {
+  height: 150px;
+  width: 300px;
+  background-color:   #404040;
+  border-radius: 7px;
+   opacity: 0.85;
+}
+
+.spinner {
+   position: absolute;
+  top: 48%;
+  left: 48%;
+  width: 70px;
+  text-align: center;
+}
+
+.spinner > div {
+  width: 18px;
+  height: 18px;
+  background-color: #F0F0F0;
+
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+.spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+@-webkit-keyframes sk-bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bouncedelay {
+  0%, 80%, 100% { 
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  } 40% { 
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+  }
+}
+
+.spinner-wrapper {
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color:#000022;
+z-index: 999999;
+}
+
+</style>
+</head>
+
+<body onload="myFunction();isLoggedIn()">
+
+  <div id="loader" class="spinner-wrapper">
+    <div class="spinner">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
+  </div>
+
+
+
+
+
+  <div class="view full-page-intro parallax" style="background-image: url('poptos.jpg'); background-repeat: no-repeat; background-size: cover; ">
+
+    <div class="mask rgba-grey-light" style=" overflow-y: scroll;">
+
+      <div class="row no-gutter fullwidth">
+        <div class="col-lg-12 col-md-12">
+          <marquee scrolldelay="180" scrollamount="15" onmouseover="this.stop();" onmouseout="this.start();">
+
+            <span class="label label-primary" style="background:#000022; font-weight: 300; padding-top: 20px; padding-bottom: 20px;">
+              <font style="color: white;">*Poptos Content Management System To implement Waiting List </font>
+            </span></strong>
+          </marquee><br>
+        </div>
+      </div>
+
+      <div id="myDIV" class="header">
+
+
+
+        <h1 style="margin:5px ; font-size: 50px; font-weight: 200;">POPTOS CMS</h1>
+        <h3 style="margin:5px; font-weight: 200; ">(WAITING GUEST LIST)</h3>
+        <br>
+
+
+        <input type="text" id="myInput" placeholder="Name...">
+        <input type="text" id="myInput1" placeholder="No. of Person...">
+        <span onclick="storeData();updateData()" class="addBtn">Add</span>
+
+
+      </div>
+      <br>
+
+      <div class="row">
+        <div class="col-sm">
+
+          <ul id="myUL" style="margin-left: 7%; margin-bottom: 2%">
+
+          </ul>
+
+        </div>
+
+
+        <div class="col-sm" style="justify-content: center; align-items: center; display: flex;">
+          <div style="  display: flex;flex-direction: column;justify-content: center;align-items: center; ">
+
+            <div class="rectangle1" style="justify-content: center; align-items: center; display: flex; flex-direction: column;">
+              <p style="color: white; ">Table of 3</p>
+              <pre id="job1" style="padding-left: 3%;">Vacunt</pre>
+              <span onclick="schedular1();sub()" class="addBtn1">Bill</span>
+
+
+
+            </div>
+
+
+            <br>
+
+            <div class="rectangle3" style="justify-content: center; align-items: center; display: flex; flex-direction: column;">
+              <p style="color: white;">Table of 6</p>
+
+              <pre id="job2" style="padding-left: 3%;">Vacunt</pre>
+              <span onclick="schedular2();sub()" class="addBtn1">Bill</span>
+            </div>
+            <br>
+
+            <div class="rectangle2" style="justify-content: center; align-items: center; display: flex; flex-direction: column;">
+              <p style="color: white;">Table of 8</p>
+              <pre id="job3" style="padding-left: 3%;">Vacunt</pre>
+
+              <span onclick="schedular3();sub()" class="addBtn1">Bill</span>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+      <div class="footer" style="border-radius: 5px;">
+        <a href="cms.html">
+          <h4 style=" color: white; font-size: 15px; font-weight: 200; padding-top: 15px; " onclick="resetState();logOut()">SIGN
+            OUT</h4>
+        </a>
+      </div>
+
+
+
+
+
+
+
+
+      <script>
+        var x = localStorage.getItem("isLoggedIn");
+        if (x === "true") {
+          console.log("welcome");
+
+        }
+        else {
+          window.location = 'cms.html';
+        }
+
+        var count = 0;
+        var id = 0;
+
+        var config = {
+          apiKey: "AIzaSyAvpxZObeqmKcFEQCVy1Zb5eaUo-hjpXhc",
+          authDomain: "management-a62a2.firebaseapp.com",
+          databaseURL: "https://management-a62a2.firebaseio.com",
+          projectId: "management-a62a2",
+          storageBucket: "management-a62a2.appspot.com",
+          messagingSenderId: "972960577898"
+        };
+        firebase.initializeApp(config);
+        const fb_db = firebase.database().ref();
+        // Initialize Cloud Firestore through Firebase
+        var db = firebase.firestore();
+        const settings = {/* your settings... */ timestampsInSnapshots: true };
+        db.settings(settings);
+
+
+
+        function isLoggedIn() {
+
+          var dbRef = firebase.database().ref().child('loggedIn');
+          dbRef.on('value', function (snap) {
+
+            var x = snap.val();
+            if (x == "true") {
+              console.log("welcome");
+
+            }
+            else {
+              window.location = 'cms.html';
+            }
+          });
+        }
+
+
+
+        user_name = "No Waiting";
+        fb_db.child('user_name').set(user_name)
+
+        function updateData() {
+
+
+
+
+
+
+          if (count === 1) {
+
+            user_name = "1 Group in Waiting (Around 5-7 mins Waiting)";
+
+
+            fb_db.child('user_name').set(user_name)
+          }
+
+          else if (count === 0) {
+
+
+            user_name = "No Waiting";
+
+
+            fb_db.child('user_name').set(user_name)
+          }
+
+          else if (count === 2) {
+
+
+            user_name = "2 Groups in Waiting(Around 7-10 mins Waiting )";
+
+
+            fb_db.child('user_name').set(user_name)
+          }
+
+          else if (count === 3) {
+
+
+            user_name = "3 Groups in Waiting(Around 10-12 mins Waiting )";
+
+
+            fb_db.child('user_name').set(user_name)
+          }
+
+          else if (count === 4) {
+
+
+            user_name = "4 Groups in Waiting(Around 12-15 mins Waiting )";
+
+
+            fb_db.child('user_name').set(user_name)
+          }
+
+          else if (count === 5) {
+
+
+            user_name = "5 Groups in Waiting(Around 15-20 mins Waiting)";
+
+
+            fb_db.child('user_name').set(user_name)
+          }
+
+          else if (count === 6 || count === 7 || count === 8) {
+
+
+            user_name = "6-8 Groups in Waiting(Around 25-30 mins Waiting)";
+
+
+            fb_db.child('user_name').set(user_name)
+          }
+
+          else {
+            user_name = "Rush hours(More than 30 mins Waiting)";
+
+
+            fb_db.child('user_name').set(user_name)
+          }
+
+
+
+
+        }
+
+
+        function resetState() {
+          count = 0;
+          updateData();
+        }
+
+        // Create a "close" button and append it to each list item
+
+        var myNodelist = document.getElementsByTagName("LI");
+        var i;
+        for (i = 0; i < myNodelist.length; i++) {
+          var span = document.createElement("SPAN");
+          var txt = document.createTextNode("\u00D7");
+          span.className = "close";
+          span.appendChild(txt);
+          myNodelist[i].appendChild(span);
+
+        }
+
+        // Click on a close button to hide the current list item
+        var close = document.getElementsByClassName("close");
+
+        var i;
+        for (i = 0; i < close.length; i++) {
+          close[i].onclick = function () {
+            var div = this.parentElement;
+            div.style.display = "none";
+
+          }
+        }
+
+        // Add a "checked" symbol when clicking on a list item
+        var list = document.querySelector('ul');
+        list.addEventListener('click', function (ev) {
+          if (ev.target.tagName === 'LI') {
+            ev.target.classList.toggle('checked');
+          }
+        }, false);
+
+
+
+
+
+        function storeData() {
+
+
+          db.settings(settings);
+          function addZero(i) {
+            if (i < 10) {
+              i = "0" + i;
+            }
+            return i;
+          }
+
+
+          // var d = new Date();
+          var d = new Date();
+
+          var h = addZero(d.getHours());
+          var m = addZero(d.getMinutes());
+          var time = h + ':' + m;
+          console.log(time);
+
+          var n = d.getTime();
+
+
+          var input = document.getElementById("myInput").value;
+          var input2 = document.getElementById("myInput1").value;
+          var input1 = parseInt(input2);
+
+
+          db.collection("List").doc().set({
+            name: input,
+            number: input1,
+            time: n,
+            entry: "offline",
+            timeofday: time
+
+          })
+            .then(function () {
+              console.log("Document successfully written!");
+            })
+            .catch(function (error) {
+              console.error("Error writing document: ", error);
+            });
+
+
+
+
+        }
+
+
+
+
+
+
+
+        db.collection("List").orderBy("time", "asc").onSnapshot(function (querySnapshot) {
+          querySnapshot.docChanges().forEach(function (change) {
+            if (change.type === "added") {
+
+
+
+
+
+              count = count + 1;
+              updateData();
+              console.log(count)
+
+              var li = document.createElement("li");
+
+
+
+              var inputValue = change.doc.data().name;
+              var entry = change.doc.data().entry;
+              var person = change.doc.data().number;
+              var time = change.doc.data().timeofday;
+
+              li.setAttribute('id', change.doc.id);
+
+
+
+              var t = document.createTextNode(inputValue);
+
+              li.appendChild(t);
+
+
+              var x = document.getElementById("myUL").appendChild(li);
+
+
+
+              document.getElementById("myInput").value = "";
+              document.getElementById("myInput1").value = "";
+              var span = document.createElement("SPAN");
+              var txt = document.createTextNode("\u00D7");
+              var txt3 = document.createTextNode("         ");
+              var txt1 = document.createTextNode('(' + entry + ')');
+              var txt2 = document.createTextNode('(' + 'P: ' + person + ')');
+
+              var s = document.createTextNode('(' + 'Time-' + time + ')');
+
+
+              span.className = "close";
+              span.appendChild(txt2);
+              span.appendChild(txt1);
+              span.appendChild(s);
+              span.appendChild(txt3);
+              span.appendChild(txt);
+              li.appendChild(span);
+
+
+              db.collection("List").orderBy("time", "asc").onSnapshot(function (querySnapshot) {
+                querySnapshot.docChanges().forEach(function (change) {
+                  if (change.type === "removed") {
+
+
+
+                    var id = change.doc.id;
+                    console.log(id)
+                    var y = document.getElementById(id);
+
+                    console.log(y);
+
+
+                    y.style.display = "none";
+
+
+                  }
+                });
+
+              });
+
+
+              for (i = 0; i < close.length; i++) {
+                close[i].onclick = function () {
+                  count = count - 1;
+                  updateData();
+                  console.log(count)
+                  let id = this.parentElement.getAttribute('id');
+
+                  db.collection("List").doc(id).delete().then(function () {
+                    var div = this.parentElement;
+                    div.style.display = "none";
+
+                    console.log("Document successfully deleted!");
+                  }).catch(function (error) {
+                    console.log("Error removing document: ", error);
+                  });
+
+                }
+
+              }
+
+            }
+
+
+          });
+        });
+
+
+
+
+
+
+
+        function logOut() {
+
+          localStorage.setItem("isLoggedIn", "false");
+          var loggedOut = "false";
+
+
+          fb_db.child('loggedIn').set(loggedOut);
+
+          const auth = firebase.auth();
+          firebase.auth().signOut();
+
+
+        }
+
+
+        var li = 0;
+
+        var job1 = document.getElementById("job1");
+        var job2 = document.getElementById("job2");
+        var job3 = document.getElementById("job3");
+
+
+        function schedular1() {
+          job1.innerHTML = 'UnOccupied';
+        }
+
+
+        function schedular2() {
+          job2.innerHTML = 'UnOccupied';
+
+
+        }
+
+        function schedular3() {
+
+          job3.innerHTML = 'UnOccupied';
+
+
+
+        }
+        function sub() {
+
+
+          db.collection("List").orderBy("time", "asc").onSnapshot(function (querySnapshot) {
+            querySnapshot.docChanges().forEach(function (change) {
+              if (change.type === "added") {
+
+                var inputValue = change.doc.data().name;
+                var inputValue1 = change.doc.data().number;
+                var time = change.doc.data().time;
+
+
+
+                if (job1.innerHTML === 'UnOccupied' && inputValue1 > 0 && inputValue1 < 4) {
+
+
+                  job1.innerHTML = 'Guest Name: ' + inputValue;
+
+                  db.collection("List").doc(change.doc.id).delete().then(function () {
+                    count = count - 1;
+                    updateData();
+                    console.log(count);
+                    console.log("Document successfully deleted!");
+                  }).catch(function (error) {
+                    console.error("Error removing document: ", error);
+                  });
+                }
+
+                else if (job2.innerHTML === 'UnOccupied' && inputValue1 > 3 && inputValue1 < 8) {
+
+
+
+                  var inputValue = change.doc.data().name;
+                  var inputValue1 = change.doc.data().number;
+                  var time = change.doc.data().time;
+
+
+                  job2.innerHTML = 'Guest Name: ' + inputValue;
+
+                  db.collection("List").doc(change.doc.id).delete().then(function () {
+                    count = count - 1;
+                    updateData();
+                    console.log(count);
+                    console.log("Document successfully deleted!");
+                  }).catch(function (error) {
+                    console.error("Error removing document: ", error);
+                  });
+
+
+                }
+
+                else if (job3.innerHTML === 'UnOccupied' && inputValue1 > 7 && inputValue1 < 11) {
+
+
+
+                  var inputValue = change.doc.data().name;
+                  var inputValue1 = change.doc.data().number;
+                  var time = change.doc.data().time;
+
+
+                  job3.innerHTML = 'Guest Name: ' + inputValue;
+
+                  db.collection("List").doc(change.doc.id).delete().then(function () {
+                    count = count - 1;
+                    updateData();
+                    console.log(count);
+                    console.log("Document successfully deleted!");
+                  }).catch(function (error) {
+                    console.error("Error removing document: ", error);
+                  });
+
+
+                }
+
+              }
+
+            });
+          })
+        }
+
+
+
+
+
+      </script>
+
+      <script>
+        var myVar;
+
+        function myFunction() {
+          myVar = setTimeout(showPage, 1700);
+        }
+
+        function showPage() {
+          document.getElementById("loader").style.display = "none";
+          document.getElementById("myDiv").style.display = "block";
+        }
+      </script>
+
+
+
+
+      <!-- SCRIPTS -->
+      <!-- JQuery -->
+      <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+      <!-- Bootstrap tooltips -->
+      <script type="text/javascript" src="js/popper.min.js"></script>
+      <!-- Bootstrap core JavaScript -->
+      <script type="text/javascript" src="js/bootstrap.min.js"></script>
+      <!-- MDB core JavaScript -->
+      <script type="text/javascript" src="js/mdb.min.js"></script>
+
+
+</body>
+
+</html>

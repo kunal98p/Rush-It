@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Restaurant Login</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="css/mdb.min.css" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link href="css/style.css" rel="stylesheet">
+  <style type="text/css">
+    .info-color {
+      background-color: #000022 !important;
+    }
+
+    .btn-outline-info {
+      border: 2px solid #000022 !important;
+      background-color: transparent !important;
+      color: #000022 !important;
+    }
+
+    .header {
+      background-color: #000022;
+      padding: 30px 40px;
+      color: white;
+      text-align: center;
+      margin-left: 1%;
+      margin-right: 1%;
+      border-radius: 0px 0px 15px 15px;
+
+    }
+
+    .gradient {
+      background: -moz-linear-gradient(45deg, rgba(42, 27, 161, 0.5), rgba(29, 210, 177, 0.5) 100%);
+      background: -webkit-linear-gradient(45deg, rgba(42, 27, 161, 0.5), rgba(29, 210, 177, 0.5) 100%);
+      background: -webkit-gradient(linear, 45deg, from(rgba(42, 27, 161, 0.5)), to(rgba(29, 210, 177, 0.5)));
+      background: -o-linear-gradient(45deg, rgba(42, 27, 161, 0.5), rgba(29, 210, 177, 0.5) 100%);
+      background: linear-gradient(to 45deg, rgba(42, 27, 161, 0.5), rgba(29, 210, 177, 0.5) 100%);
+    }
+
+    .animate-bottom {
+      position: relative;
+      -webkit-animation-name: animatebottom;
+      -webkit-animation-duration: 1s;
+      animation-name: animatebottom;
+      animation-duration: 1s
+    }
+
+    @-webkit-keyframes animatebottom {
+      from {
+        bottom: -30px;
+        opacity: 0
+      }
+
+      to {
+        bottom: 0px;
+        opacity: 1
+      }
+    }
+
+    @keyframes animatebottom {
+      from {
+        bottom: -30px;
+        opacity: 0
+      }
+
+      to {
+        bottom: 0;
+        opacity: 1
+      }
+    }
+
+    .spinner {
+      position: absolute;
+      top: 48%;
+      left: 48%;
+      width: 70px;
+      text-align: center;
+    }
+
+    .spinner>div {
+      width: 18px;
+      height: 18px;
+      background-color: #F0F0F0;
+
+      border-radius: 100%;
+      display: inline-block;
+      -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+      animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+    }
+
+    .spinner .bounce1 {
+      -webkit-animation-delay: -0.32s;
+      animation-delay: -0.32s;
+    }
+
+    .spinner .bounce2 {
+      -webkit-animation-delay: -0.16s;
+      animation-delay: -0.16s;
+    }
+
+    @-webkit-keyframes sk-bouncedelay {
+
+      0%,
+      80%,
+      100% {
+        -webkit-transform: scale(0)
+      }
+
+      40% {
+        -webkit-transform: scale(1.0)
+      }
+    }
+
+    @keyframes sk-bouncedelay {
+
+      0%,
+      80%,
+      100% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+      }
+
+      40% {
+        -webkit-transform: scale(1.0);
+        transform: scale(1.0);
+      }
+    }
+
+    .spinner-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #000022;
+      z-index: 999999;
+    }
+  </style>
+</head>
+
+<body onload="myFunction()">
+
+
+  <div id="loader" class="spinner-wrapper">
+    <div class="spinner">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
+  </div>
+  <!-- style="display: flex;
+  justify-content: center;
+  align-items: center;"> -->
+  <div class="view full-page-intro parallax " style="background-image: url('pic1.jpg'); background-repeat: no-repeat; background-size: cover; position: relative;">
+
+    <div class="mask rgba-grey-light">
+
+      <div id="myDIV" class="header">
+        <h1 style="margin:5px">RESTAURANT LOGIN</h1>
+
+
+      </div>
+
+      <br>
+      <br>
+      <br>
+      <br>
+
+      <div style="display: flex;
+  justify-content: center;
+  margin-top: auto; margin-bottom: auto; " class="animate-bottom">
+
+
+        <div class="card" style="width: 50%; height: 50%; opacity: 0.9; border-radius: 15px 15px 15px 15px;">
+
+          <h5 class="card-header info-color white-text text-center py-4" style="border-radius: 15px 15px 0px 0px;">
+            <strong>Sign In with your Restaurant ID</strong>
+          </h5>
+
+          <!--Card content-->
+          <div class="card-body px-lg-5 pt-0" style="">
+
+            <!-- Form -->
+            <div class="text-center" style="color: #757575;">
+
+              <!-- Email -->
+              <div class="md-form">
+                <input type="email" id="user_id" class="form-control">
+                <label>E-mail</label>
+              </div>
+
+              <!-- Password -->
+              <div class="md-form">
+                <input type="password" id="user_pass" class="form-control">
+                <label>Password</label>
+              </div>
+
+              <br>
+
+              <!-- Sign in button -->
+              <button class="btn btn-outline-info btn-rounded waves-effect z-depth-0 " style="border-radius: 50px;" id="btnLogin"
+                onclick="onloading()">Sign in</button>
+
+
+
+
+            </div>
+            <!-- Form -->
+
+          </div>
+
+        </div>
+      </div>
+
+      <br>
+      <br>
+      <div id="loading" style="color: white; text-align: center;"></div>
+      <div id="loading1" style="color: white; text-align: center; display: none; font-weight: 400 ; font-size: 20px;">Authenticating
+        , Please Wait....</div>
+
+
+    </div>
+  </div>
+
+
+
+  <!-- <script >
+
+
+    function updateData(){
+
+    var user_id = document.getElementById("user_id").value;
+    var user_pass = document.getElementById("user_pass").value;
+
+    if(user_id=="poptos@gmail.com" && user_pass=="poptos"){
+               
+               window.location = 'PoptosCMS.html';
+
+    
+    }
+    else{
+        window.alert("Wrong ID or Password");
+    }
+}
+
+
+</script> -->
+  <script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
+  <script type="text/javascript">
+
+    var config = {
+      apiKey: "AIzaSyAvpxZObeqmKcFEQCVy1Zb5eaUo-hjpXhc",
+      authDomain: "management-a62a2.firebaseapp.com",
+      databaseURL: "https://management-a62a2.firebaseio.com",
+      projectId: "management-a62a2",
+      storageBucket: "management-a62a2.appspot.com",
+      messagingSenderId: "972960577898"
+    };
+    firebase.initializeApp(config);
+    const fb_db = firebase.database().ref();
+
+    const user_id = document.getElementById("user_id");
+    const user_pass = document.getElementById("user_pass");
+    const btnLogin = document.getElementById("btnLogin");
+
+    btnLogin.addEventListener('click', e => {
+
+      const email = user_id.value;
+      const password = user_pass.value;
+      const auth = firebase.auth();
+
+      const promise = auth.signInWithEmailAndPassword(email, password);
+      promise.catch(e => alert("Error"));
+
+
+
+    });
+
+    firebase.auth().onAuthStateChanged(firebaseUser => {
+      if (firebaseUser) {
+        localStorage.setItem("isLoggedIn", "true");
+        var loggedIn = "true";
+
+        fb_db.child('loggedIn').set(loggedIn);
+
+        const user_id = document.getElementById("user_id");
+        window.location = 'PoptosCMS.html';
+      }
+    });
+
+
+
+  </script>
+
+  <script type="text/javascript">
+
+
+    function onloading() {
+
+      var loading = document.getElementById("loading");
+      var loading1 = document.getElementById("loading1");
+      loading1.style.display = "block";
+      loading.style.display = "block";
+
+      loading.innerHTML = '<img src="https://media.giphy.com/media/3o7TKtnuHOHHUjR38Y/source.gif" style="height: 35px; width: 35px; margin-left: 50%; ">';
+
+
+
+      setTimeout(function () {
+        loading.style.display = "none";
+        loading1.style.display = "none";
+
+      }, 1500);
+    }
+
+  </script>
+
+  <script>
+    var myVar;
+
+    function myFunction() {
+      myVar = setTimeout(showPage, 1700);
+    }
+
+    function showPage() {
+      document.getElementById("loader").style.display = "none";
+      document.getElementById("myDiv").style.display = "block";
+    }
+  </script>
+
+
+  <!-- Material form login -->
+  <!-- Default form login -->
+
+  <!-- SCRIPTS -->
+  <!-- JQuery -->
+  <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="js/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="js/mdb.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <!--     <script async src="https://cdn.ampproject.org/v0.js"></script> -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>HMS</title>
+  <!--    <link rel="canonical" href="http://example.ampproject.org/article-metadata.html">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "NewsArticle",
+        "headline": "Open-source framework for publishing content",
+        "datePublished": "2015-10-07T12:02:41Z",
+        "image": [
+          "logo.jpg"
+        ]
+      }
+    </script>
+ -->
+
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="manifest" href="/manifest.json">
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="css/mdb.min.css" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link href="css/style.min.css" rel="stylesheet">
+  <style type="text/css">
+    /* @media (min-width: 800px) and (max-width: 850px) {
+      html,
+      body,
+      header,
+      .view {
+        height: 650px;
+      }
+    }*/
+    @media (max-width: 900px) {
+      .navbar:not(.top-nav-collapse) {
+        background: #1C2331 !important;
+      }
+    }
+
+    /* Set the size of the div element that contains the map */
+    #map {
+      height: 200px;
+      width: 300px;
+
+    }
+
+
+
+    .parallax {
+
+
+      /* Full height */
+      height: 100%;
+
+      /* Create the parallax scrolling effect */
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .zooms {
+
+      transition: transform .2s;
+      /* Animation */
+
+    }
+
+    .zoom:hover {
+      transform: scale(1.1);
+      /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+    }
+
+    /* Close button */
+    .closebtn {
+      position: absolute;
+      top: 5px;
+      right: 15px;
+      color: white;
+      font-size: 30px;
+      cursor: pointer;
+    }
+
+    /* Change color on mouse-over */
+    .closebtn:hover {
+      color: lightgrey;
+    }
+
+    .btn1 {
+      background-color: #f4511e;
+      border: none;
+      color: white;
+      padding: 16px 32px;
+      text-align: center;
+      font-size: 16px;
+      margin: 4px 2px;
+      opacity: 0.8;
+      transition: 0.3s;
+    }
+
+    .btn1:hover {
+      opacity: 1
+    }
+
+    .gradient {
+      background: -moz-linear-gradient(45deg, rgba(42, 27, 161, 0.5), rgba(29, 210, 177, 0.5) 100%);
+      background: -webkit-linear-gradient(45deg, rgba(42, 27, 161, 0.5), rgba(29, 210, 177, 0.5) 100%);
+      background: -webkit-gradient(linear, 45deg, from(rgba(42, 27, 161, 0.5)), to(rgba(29, 210, 177, 0.5)));
+      background: -o-linear-gradient(45deg, rgba(42, 27, 161, 0.5), rgba(29, 210, 177, 0.5) 100%);
+      background: linear-gradient(to 45deg, rgba(42, 27, 161, 0.5), rgba(29, 210, 177, 0.5) 100%);
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+
+      position: relative;
+      position: absolute;
+      top: 48%;
+      left: 48%;
+    }
+
+    .double-bounce1,
+    .double-bounce2 {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background-color: #4D5656;
+      opacity: 0.6;
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+      animation: sk-bounce 2.0s infinite ease-in-out;
+    }
+
+    .double-bounce2 {
+      -webkit-animation-delay: -1.0s;
+      animation-delay: -1.0s;
+    }
+
+    @-webkit-keyframes sk-bounce {
+
+      0%,
+      100% {
+        -webkit-transform: scale(0.0)
+      }
+
+      50% {
+        -webkit-transform: scale(1.0)
+      }
+    }
+
+    @keyframes sk-bounce {
+
+      0%,
+      100% {
+        transform: scale(0.0);
+        -webkit-transform: scale(0.0);
+      }
+
+      50% {
+        transform: scale(1.0);
+        -webkit-transform: scale(1.0);
+      }
+    }
+
+    .spinner-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #000022;
+      z-index: 999999;
+    }
+
+    /* Add animation to "page content" */
+
+
+    #myDiv {
+      display: none;
+      text-align: center;
+    }
+
+    .animate-bottom {
+      position: relative;
+      -webkit-animation-name: animatebottom;
+      -webkit-animation-duration: 1s;
+      animation-name: animatebottom;
+      animation-duration: 1s
+    }
+
+    @-webkit-keyframes animatebottom {
+      from {
+        bottom: -10px;
+        opacity: 0
+      }
+
+      to {
+        bottom: 0px;
+        opacity: 1
+      }
+    }
+
+    @keyframes animatebottom {
+      from {
+        bottom: -10px;
+        opacity: 0
+      }
+
+      to {
+        bottom: 0;
+        opacity: 1
+      }
+    }
+
+    #mobile {
+      display: none;
+    }
+
+    #website {
+      display: block;
+    }
+
+
+    #grid {
+      padding-top: 60px;
+    }
+
+    @media screen and (max-width: 900px) {
+      #mobile {
+        display: block;
+      }
+
+      #website {
+        display: none;
+      }
+
+      .navbar {
+        height: 60px;
+      }
+
+      .display-3 {
+        font-size: 2.3rem;
+      }
+
+      .page-footer {
+        display: none;
+      }
+
+      #changeText {
+        font-size: 40px;
+      }
+
+      .kk {
+        font-size: 12px;
+      }
+
+      .view,
+      .view .mask,
+      .waves-effect {
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .display-4 {
+        font-size: 2.5rem;
+      }
+
+      #map {
+        height: 150px;
+        width: 250px;
+        border-radius: 7px;
+
+      }
+
+      #kk {
+        display: none;
+      }
+    }
+
+    @media screen and (max-width: 900px) {
+
+      .card {
+        margin-left: 2%;
+        margin-right: 2%;
+        height: 180px;
+      }
+
+      img {
+        height: 10px;
+        width: 10px;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+
+      h1 {
+        font-size: 40px;
+      }
+
+      #zz {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .navbar {
+        background-color: #37454d;
+      }
+
+      input {
+
+        opacity: 0.8;
+        height: 40px;
+        padding-left: 2%;
+        width: 100%;
+      }
+
+      .btn-success {
+        background-color: #37454d !important;
+        color: #fff !important;
+      }
+
+      #container {
+        display: flex;
+        justify-content: center;
+      }
+
+      #grid {
+        padding-top: 0px;
+        margin-top: 35%;
+      }
+
+      .btn-indigo {
+        background-color: #1C2331 !important;
+        color: #fff !important;
+      }
+
+    }
+
+    @media screen and (max-width: 900px) {
+
+      .card {
+        margin-left: 2%;
+        margin-right: 2%;
+        height: 180px;
+      }
+
+      img {
+        height: 10px;
+        width: 10px;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+
+      h1 {
+        font-size: 40px;
+      }
+
+      #zz {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .navbar {
+        background-color: #37454d;
+      }
+
+      input {
+
+        opacity: 0.8;
+        height: 40px;
+        padding-left: 2%;
+        width: 100%;
+      }
+
+      .btn-success {
+        background-color: #37454d !important;
+        color: #fff !important;
+      }
+
+      #container {
+        display: flex;
+        justify-content: center;
+      }
+
+      #grid {
+        padding-top: 0px;
+        margin-top: 35%;
+      }
+
+      .btn-indigo {
+        background-color: #1C2331 !important;
+        color: #fff !important;
+      }
+
+    }
+  </style>
+</head>
+
+<body onload="myFunction();">
+
+  <!-- preloader -->
+  <!--   <div class="show"  >Sorry! We are Currently Working on Mobile Support :/  </div>
+  <div class="show1"  >Switch to Desktop Version... <span> <br>OR <br> <a href="csv.html">kunal98p.github.io/csv.html</a> <br>to Reserve your Seat</div> -->
+
+
+  <div id="loader" class="spinner-wrapper">
+    <div class="spinner">
+      <div class="double-bounce1"></div>
+      <div class="double-bounce2"></div>
+      <br><br><br><br><br>
+      <h1 id="changeText" class=" display-1 d-flex justify-content-center" style="color: #4D5656 ;"></h1>
+
+
+    </div>
+  </div>
+
+
+
+  <!-- Navbar -->
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar ">
+    <div class="container" id="container">
+
+      <!-- Brand -->
+      <a class="navbar-brand" target="_blank">
+        <strong class="white-text display-4" id="zz">HMS</strong>
+
+      </a>
+      <a href="cms.html">
+        <strong class="white-text justify-content-right align-items-right " id="kk" style="text-align: right; font-size: 18px;   font-weight: 400;">
+
+          <i class="fa fa-users" aria-hidden="true" style="padding-right: 5px;"></i>
+
+          RESTAURANT LOGIN</strong>
+      </a>
+    </div>
+
+    </div>
+  </nav>
+  <!-- Navbar -->
+
+  <!-- Full Page Intro -->
+  <div class="view full-page-intro parallax " style="background-image: url('sample.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+    <!-- Mask & flexbox options-->
+    <div class="mask gradient d-flex justify-content-center align-items-center">
+
+      <!-- Content -->
+      <div class="container">
+
+        <!--Grid row-->
+        <div class="row wow fadeIn">
+
+          <!--Grid column-->
+          <div class=" col-xl-6 mb-4 white-text text-center text-md-left" id="grid">
+
+            <h1 class="font-weight-bold mt-sm-5 display-3" id="xy">WELCOME :)</h1>
+
+            <hr class="hr-light">
+
+            <h5 class="mb-4 ">
+              Give it a try, It saves time </h5>
+
+            <p class="mb-4 d-none d-md-block">
+              <h4 class="display-3" id="xx">"Dynamic Hotel Management System(HMS)"</h4>
+            </p>
+
+          </div>
+          <!--Grid column-->
+          <div class="col-xl-1">
+          </div>
+
+
+          <!--Grid column-->
+          <div class="col-xl-5 mb-4 d-flex justify-content-center align-items-center ">
+
+
+
+            <!--Card-->
+            <div class="card rgba-stylish-strong animate-bottom " id="website">
+
+              <!--Card content-->
+              <div class="card-body tt">
+
+                <div id="map" style="color: red; font-size: 20px; margin-top: auto;margin-bottom: auto; text-align: center; font-weight: 550;">Please
+                  Allow this app Access your Location Or You are Offline :\
+                </div>
+                <br>
+
+                <div id="kunal1"> </div>
+
+
+                <div id=kunal></div>
+
+
+                <div id="kunal2" style="color: red;"></div>
+              </div>
+
+            </div>
+
+            <div id="mobile">
+              <div style="display: flex; justify-content: center;; align-items: center;">
+                <input placeholder="Enter your Location!" id="x1" style="border-radius: 13px; padding-left: 5%; ">
+
+                <span><button type="button" class="btn btn-success" style="padding: 7px 25px; border-radius: 13px;"
+                    onclick="ex()">Go</button></span>
+              </div>
+              <div style="text-align:  center; color: white; margin: 3%;">OR</div>
+              <div style="display: flex;justify-content: center;">
+                <button type="button" class="btn btn-success" style="padding: 7px 25px; border-radius: 13px;" onclick="ex1()">Get
+                  Location!</button>
+              </div>
+
+
+
+              <div id="x3" style="margin-top: 10%;"></div>
+
+
+              <div id="x4" style="color: red; margin-top: 10%;"></div>
+
+            </div>
+          </div>
+          <!--/.Card-->
+
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+    </div>
+    <!-- Content -->
+
+  </div>
+  <!-- Mask & flexbox options-->
+
+  </div>
+  <!-- Full Page Intro -->
+
+
+
+  <!--Footer-->
+  <footer class="page-footer text-center font-small mt-4 wow-fadeIn">
+
+
+    <div class="pt-4">
+      <p class="display-5 container">A PWA(Progressive Web Application ) that shows the Restaurants around with their
+        Real Time Waiting to the Clients, a Waiting list manager and smart schedular for the Admins and uses
+        techologies like AMP(Acclerated Mobile Pages) ,asynchronous background refesh, Service Workers, AJAX ,
+        Intelligent Caching, offline support ,manifests, Geolocation API, Push Notifications and many more. </p>
+
+
+
+    </div>
+
+
+    <hr class="my-4">
+
+  </footer>
+  <!--/.Footer-->
+
+
+  <script>
+
+
+
+
+
+
+    if (navigator.geolocation) {
+      navigator.geolocation.watchPosition(showPosition);
+    } else {
+      x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+
+
+
+    function showPosition(position) {
+
+
+
+      var mapOptions = {
+        center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.HYBRID,
+
+
+
+
+      }
+
+
+      var myCenter = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+      var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+      var marker = new google.maps.Marker({ position: myCenter });
+      marker.setMap(map);
+
+      if ((position.coords.latitude > 22 && position.coords.latitude < 23) && (position.coords.longitude > 72 && position.coords.longitude < 74)) {
+        localStorage.setItem("anand", "true");
+        document.getElementById("kunal1").innerHTML = "<h6  style='color: green ; background: white; border-radius: 7px; padding-top: 5px; padding-bottom: 5px; text-align: center; width: 70%;margin-left: auto; margin-right: auto; font-weight: 500px; margin-bottom: 15px; '>" + "Available in Your Region :)" + "</h6>";
+        document.getElementById("kunal").innerHTML = "<a href='csv.html' class='btn btn-indigo btn-lg d-flex justify-content-center zoom btn1' >" + "EXPLORE" + "</a>"
+      }
+      else {
+        document.getElementById("kunal2").innerHTML = "Sorry! We are Not Available in Your Region :(";
+        localStorage.setItem("anand", "false");
+      }
+
+    }
+
+  </script>
+  <!--Load the API from the specified URL
+          * The async attribute allows the browser to render the page while the API loads
+          * The key parameter will contain your own API key (which is not needed for this tutorial)
+          * The callback parameter executes the initMap() function
+          -->
+  <script src="https://maps.googleapis.com/maps/api/js?callback=showPosition"></script>
+
+  <!-- SCRIPTS -->
+  <!-- JQuery -->
+  <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="js/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="js/mdb.min.js"></script>
+  <!-- Initializations -->
+  <script type="text/javascript">
+    // Animations initialization
+    new WOW().init();
+  </script>
+
+  <script>
+
+
+    var text = ["Holà", "Hiiii", "नमस्ते  "];
+    var counter = 0;
+    var elem = document.getElementById("changeText");
+    var inst = setInterval(change, 500);
+
+    function change() {
+      elem.innerHTML = text[counter];
+      counter++;
+      if (counter >= text.length) {
+        counter = 0;
+        // clearInterval(inst); // uncomment this if you want to stop refreshing after one cycle
+      }
+    }
+  </script>
+
+  <script>
+    var myVar;
+
+    function myFunction() {
+      myVar = setTimeout(showPage, 1700);
+    }
+
+    function showPage() {
+      document.getElementById("loader").style.display = "none";
+    }
+  </script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      // console.log("Will the service worker register?");
+      navigator.serviceWorker.register('service-worker.js')
+        .then(function (reg) {
+          console.log("Yes, it did.");
+        }).catch(function (err) {
+          console.log("No it didn't. This happened: ", err)
+        });
+    }
+  </script>
+
+
+  <script type="text/javascript">
+
+    function ex() {
+      var input1 = document.getElementById("x1").value;
+      input = input1.toLowerCase();
+      if (input === "anand") {
+        localStorage.setItem("anand", "true");
+        document.getElementById("x3").innerHTML = "<a href='csv.html' class='btn btn-indigo btn-lg d-flex justify-content-center zoom btn1' >" + "EXPLORE" + "</a>"
+        var x4 = document.getElementById("x4");
+        document.getElementById("x3").style.display = "block";
+        x4.style.display = "none";
+
+      }
+      else {
+        document.getElementById("x4").innerHTML = "Sorry! We are Not Available in Your Region :(";
+        document.getElementById("x4").style.display = "block";
+        document.getElementById("x3").style.display = "none";
+        localStorage.setItem("anand", "false");
+      }
+      document.getElementById("x1").value = "";
+
+
+
+
+    }
+
+    function ex1() {
+      document.getElementById("mobile").style.display = "none";
+      document.getElementById("website").style.display = "block";
+    }
+  </script>
+
+</body>
+
+</html>

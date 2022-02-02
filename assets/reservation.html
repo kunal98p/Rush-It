@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Reservation</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="css/mdb.min.css" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link href="css/style.css" rel="stylesheet">
+
+
+  <script src="https://www.gstatic.com/firebasejs/5.5.0/firebase.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+
+  <style>
+
+    /* Include the padding and border in an element's total width and height */
+
+/* Remove margins and padding from the list */
+
+
+/* Style the header */
+.header {
+  background-color: #000022;
+  padding: 30px 40px;
+  color: white;
+  text-align: center;
+}
+
+/* Clear floats after the header */
+.header:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the input */
+input {
+  
+  border: none;
+  
+  width: 50%;
+  padding: 10px;
+  margin: 10px;
+  float: left;
+  font-size: 16px;
+  margin-right: 20px;
+  border-radius: 7px;
+}
+
+.view, .view .mask, .waves-effect {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+
+
+/* Style the "Add" button */
+.addBtn {
+  padding: 10px;
+  margin: 10px;
+  width: 15%;
+  background: #d9d9d9;
+  color: #555;
+  float: left;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 0;
+  border-radius: 8px;
+}
+
+
+.addBtn:hover {
+  background-color: #bbb;
+}
+
+.gradient {
+      background: -moz-linear-gradient(45deg, rgba(42, 27, 161, 0.5), rgba(29, 210, 177, 0.5) 100%);
+      background: -webkit-linear-gradient(45deg, rgba(42, 27, 161, 0.5), rgba(29, 210, 177, 0.5) 100%);
+     /* background: -webkit-gradient(linear, 45deg, from(rgba(42, 27, 161, 0.5)), to(rgba(29, 210, 177, 0.5)));*/
+      background: -o-linear-gradient(45deg, rgba(42, 27, 161, 0.5), rgba(29, 210, 177, 0.5) 100%);
+      background: linear-gradient(to 45deg, rgba(42, 27, 161, 0.5), rgba(29, 210, 177, 0.5) 100%);
+   }
+
+      .animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s
+}
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-30px; opacity:0 } 
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom { 
+  from{ bottom:-30px; opacity:0 } 
+  to{ bottom:0; opacity:1 }
+}
+   
+
+@media screen and (max-width: 900px) {
+
+  input {
+  
+  border: none;
+  
+  width: 90%;
+  padding: 10px;
+  margin: 10px;
+  float: left;
+  font-size: 16px;
+  margin-right: 20px;
+  border-radius: 7px;
+}
+
+
+
+/* Style the "Add" button */
+.addBtn {
+  padding: 10px;
+  margin: 10px;
+  width: 30%;
+  background: #d9d9d9;
+  color: #555;
+  float: left;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 0;
+  border-radius: 8px;
+}
+
+  .view {
+    background-image: url('pic1.jpg');
+     background-repeat: no-repeat; 
+     background-size: cover;
+      height: 100%;
+
+  }
+  #demo{
+    font-weight: 430;
+    font-size: 20px;
+     margin-left: 10%;
+      margin-right: 10%;
+  }
+  #test2{
+      
+      font-size: 27px;
+     
+  }
+
+  @media screen and (max-width: 998px) {
+  .view {
+    background-image: url('pic1.jpg');
+     background-repeat: no-repeat; 
+     background-size: cover;
+      height: 100%;
+
+  }
+  #demo{
+    font-weight: 430;
+    font-size: 20px;
+     margin-left: 10%;
+      margin-right: 10%;
+  }
+  #test2{
+      
+      font-size: 27px;
+     
+  }
+
+
+
+</style>
+</head>
+
+<body onload="initNotifications()">
+
+  <div class="view full-page-intro parallax" style="background-image: url('pic1.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+    <div class="mask rgba-grey-light">
+
+      <div id="myDIV" class="header animate-bottom" style="  margin-top: 10%; margin-left: 2%; margin-right: 2%; border-radius: 5px;">
+        <h1 style="margin:5px ; font-size: 50px; font-weight: 200; margin-top: 5%;">RESERVE YOUR PLACE</h1>
+        <br>
+        <h3 style="margin:5px; font-weight: 200; ">(GUEST ENTRY)</h3>
+        <br>
+
+        <div style="display: flex;align-items: center; justify-content: center; flex-direction: column;">
+          <input type="text" id="myInput" placeholder="Name...">
+          <input type="text" id="Input" placeholder="No of person...">
+
+          <span onclick="createData()" class="addBtn">Add</span>
+          <span id="test2" style="font-size: 25px; color: green;"></span>
+
+        </div>
+
+
+      </div>
+
+      <br>
+      <br>
+
+      <h1 id="demo" style="color: green; text-align: center;"></h1>
+
+    </div>
+  </div>
+
+
+  <script>
+
+
+
+    var notificationsEnabled = false;
+
+
+    function initNotifications() {
+      if (window.Notification) {
+        Notification.requestPermission(function (permission) {
+          if (permission === 'granted') {
+            notificationsEnabled = true;
+          } else {
+            alert("You denied Notifications, it's so sad :(");
+          }
+        });
+      } else {
+        alert("Your browser doesn't support Notifications API");
+      }
+    }
+
+
+
+
+    var x = localStorage.getItem("show");
+    if (x === "true") {
+      console.log("welcome");
+
+    }
+    else {
+      window.location = 'csv.html';
+    }
+
+
+
+    var config = {
+      apiKey: "AIzaSyAvpxZObeqmKcFEQCVy1Zb5eaUo-hjpXhc",
+      authDomain: "management-a62a2.firebaseapp.com",
+      databaseURL: "https://management-a62a2.firebaseio.com",
+      projectId: "management-a62a2",
+      storageBucket: "management-a62a2.appspot.com",
+      messagingSenderId: "972960577898"
+    };
+    firebase.initializeApp(config);
+
+    // Initialize Cloud Firestore through Firebase
+    var db = firebase.firestore();
+    const settings = {/* your settings... */ timestampsInSnapshots: true };
+    db.settings(settings);
+
+
+
+
+
+
+    var inputValue;
+
+    var dbRef = firebase.database().ref().child('object');
+    var dbRef1 = dbRef.child('name');
+
+    function createData() {
+
+
+
+
+
+
+
+      var inputValue = document.getElementById("myInput").value;
+      var input = document.getElementById("Input").value;
+      name = inputValue;
+
+      if (inputValue === '' || isNaN(input)) {
+        alert("You must write something Valid! Refresh and Try Again");
+
+
+      }
+
+      else if (input > 15) {
+        alert("Limit Exceeded");
+      }
+
+      else if (input < 0) {
+        alert("Invalid Input");
+      }
+
+      else if (inputValue !== '' && (input > 0 && input < 15)) {
+
+        db.settings(settings);
+        function addZero(i) {
+          if (i < 10) {
+            i = "0" + i;
+          }
+          return i;
+        }
+
+
+        // var d = new Date();
+        var d = new Date();
+
+        var h = addZero(d.getHours());
+        var m = addZero(d.getMinutes());
+        var time = h + ':' + m;
+        console.log(time);
+
+        var n = d.getTime();
+
+
+
+        // Add a new document in collection "cities"
+        db.collection("List").doc().set({
+          name: inputValue,
+          number: input,
+          time: n,
+          entry: "online",
+          timeofday: time
+
+        })
+          .then(function () {
+            console.log("Document successfully written!");
+
+
+
+            if (notificationsEnabled) {
+              var notification = new Notification("HMS", {
+                body: 'Hello ' + inputValue + '! Your Seat for ' + input + ' person has been Successfully Reserved at ' + time + ' .Have a Nice Time:)',
+                icon: '/images/icons/fox-icon.png'
+              });
+
+            } else {
+              alert("Notifications are disabled");
+            }
+
+
+
+
+
+          })
+          .catch(function (error) {
+            console.error("Error writing document: ", error);
+          });
+
+
+
+      }
+      document.getElementById("myInput").value = "";
+      document.getElementById("Input").value = "";
+
+
+    }
+
+
+
+
+
+  </script>
+
+  <script type="text/javascript">
+
+
+
+
+    $(document).ready(function () {
+      $(".addBtn").on("click", function () {
+        $(this).hide();
+        $("#myInput").hide();
+        $("#Input").hide();
+        $("#test2").html("Refresh To Enter Again!!");
+
+
+
+      });
+    });
+
+  </script>
+
+  <!-- SCRIPTS -->
+  <!-- JQuery -->
+  <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="js/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="js/mdb.min.js"></script>
+
+
+</body>
+
+</html>

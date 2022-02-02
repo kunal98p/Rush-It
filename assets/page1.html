@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Waiting</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.0/firebase.js"></script>
+<style >
+  
+  .animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s
+}
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-50px; opacity:0 } 
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom { 
+  from{ bottom:-50px; opacity:0 } 
+  to{ bottom:0; opacity:1 }
+}
+    
+  /* ---- reset ---- */ body{ margin:0; font:normal 75% Arial, Helvetica, sans-serif; } canvas{ display: block; vertical-align: bottom; } /* ---- particles.js container ---- */ #particles-js{ position:absolute; width: 100%; height: 100%; background-color: #000022; background-image: url(""); background-repeat: no-repeat; background-size: cover; background-position: 50% 50%; } /* ---- stats.js ---- */ .count-particles{ background: #000022; position: absolute; top: 48px; left: 0; width: 80px; color: #13E8E9; font-size: .8em; text-align: left; text-indent: 4px; line-height: 14px; padding-bottom: 2px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; } .js-count-particles{ font-size: 1.1em; } #stats, .count-particles{ -webkit-user-select: none; margin-top: 5px; margin-left: 5px; } #stats{ border-radius: 3px 3px 0 0; overflow: hidden; } .count-particles{ border-radius: 0 0 3px 3px; }
+
+  
+
+
+.text-block {
+    position: absolute;
+  left: 10%;
+  color:#ffffff ;
+}
+
+
+element.style {
+    margin-top: 50px;
+}
+.animate-bottom {
+    position: relative;
+    -webkit-animation-name: animatebottom;
+    -webkit-animation-duration: 1s;
+    animation-name: animatebottom;
+    animation-duration: 1s;
+}
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+div {
+    display: block;
+}
+.text-block {
+    position: absolute;
+    left: 10%;
+    color: #ffffff;
+}
+.h6, h6 {
+    font-size: 28px;
+}
+
+.btn-group-vertical>.btn-group:after, .btn-group-vertical>.btn-group:before, .btn-toolbar:after, .btn-toolbar:before, .clearfix:after, .clearfix:before, .container-fluid:after, .container-fluid:before, .container:after, .container:before, .dl-horizontal dd:after, .dl-horizontal dd:before, .form-horizontal .form-group:after, .form-horizontal .form-group:before, .modal-footer:after, .modal-footer:before, .modal-header:after, .modal-header:before, .nav:after, .nav:before, .navbar-collapse:after, .navbar-collapse:before, .navbar-header:after, .navbar-header:before, .navbar:after, .navbar:before, .pager:after, .pager:before, .panel-body:after, .panel-body:before, .row:after, .row:before {
+    display: table;
+    /* content: " "; */
+}
+/*@media screen and (max-width: 600px) {
+  canvas{
+  	display: none;	
+  }
+
+h6{
+	font-size: 20px;
+}
+
+}*/
+/**/
+
+  </style>
+</head>
+<body>
+
+<div id="particles-js" style="position: fixed; overflow-y: scroll;">
+  <div class="text-block container"  >
+
+
+      <div id = "demo" >
+       <div class="container animate-bottom" style="margin-top: 50px; ">
+
+          <div class="row">
+            <div class="col-sm-4"><h6>Grill Kitchen</h6></div>
+            <div class="col-sm-8"><pre id="bigOne"><img src="http://media.churchattheplains.org/wp-content/uploads/sites/7/2016/11/uploading.gif" style="width: 20px; height: 20px;  margin-left: 5%; "></pre></div>
+          </div>
+              <br>
+              <br>
+          <div class="row">
+            <div class="col-sm-4"><h6>Dominos</h6></div>
+            <div class="col-sm-8"><pre id="bigTwo"><img src="http://media.churchattheplains.org/wp-content/uploads/sites/7/2016/11/uploading.gif" style="width: 20px; height: 20px;  margin-left: 5%; "></pre></div>
+          </div>
+              <br>
+              <br>
+           <div class="row">
+            <div class="col-sm-4"><h6>Poptos</h6>
+              <a href="example.html " id="xxx" style="display: none;"><h5>*Click To Reserve a Seat in Advance  <img src="http://www.adit.ac.in/img/new.gif" style="height: 1em; width: 2em"></h5></a></div>
+
+
+            
+            <div class="col-sm-8"><pre id="bigThree"><img src="http://media.churchattheplains.org/wp-content/uploads/sites/7/2016/11/uploading.gif" style="width: 20px; height: 20px;  margin-left: 5%; "></pre></div>
+            
+          </div>
+              <br>
+              <br>
+
+          <div class="row">
+            <div class="col-sm-4"><h6>Madhuban Report</h6></div>
+            <div class="col-sm-8"><pre id="bigFour"><img src="http://media.churchattheplains.org/wp-content/uploads/sites/7/2016/11/uploading.gif" style="width: 20px; height: 20px;  margin-left: 5%; "></pre></div>
+          </div>
+
+              <br>
+              <br>
+           <div class="row">
+            <div class="col-sm-4"><h6>Hot & Spicy</h6></div>
+            <div class="col-sm-8"><pre id="bigFive"><img src="http://media.churchattheplains.org/wp-content/uploads/sites/7/2016/11/uploading.gif" style="width: 20px; height: 20px;  margin-left: 5%; "></pre></div>
+          </div>
+
+              <br>
+              <br>
+           <div class="row">
+            <div class="col-sm-4"><h6>Quiches</h6></div>
+            <div class="col-sm-8"><pre id="bigSix"><img src="http://media.churchattheplains.org/wp-content/uploads/sites/7/2016/11/uploading.gif" style="width: 20px; height: 20px;  margin-left: 5%; "></pre></div>
+          </div>
+
+              <br>
+              <br>
+           <div class="row">
+            <div class="col-sm-4"><h6>Recharge cafe</h6></div>
+            <div class="col-sm-8"><pre id="bigSeven"><img src="http://media.churchattheplains.org/wp-content/uploads/sites/7/2016/11/uploading.gif" style="width: 20px; height: 20px;  margin-left: 5%; "></pre></div>
+          </div>
+              <br>
+              <br>
+
+
+           <div class="row">
+            <div class="col-sm-4"><h6>Khetlapa</h6></div>
+            <div class="col-sm-8"><pre id="bigEight"><img src="http://media.churchattheplains.org/wp-content/uploads/sites/7/2016/11/uploading.gif" style="width: 20px; height: 20px;  margin-left: 5%; "></pre></div>
+          </div>
+
+        </div>
+    </div>
+  </div>
+</div>
+
+<!-- database connection -->
+
+<!-- <script src="https://www.gstatic.com/firebasejs/5.5.0/firebase.js"></script> -->
+<script>
+
+
+  function addZero(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+  }
+
+
+  
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAvpxZObeqmKcFEQCVy1Zb5eaUo-hjpXhc",
+    authDomain: "management-a62a2.firebaseapp.com",
+    databaseURL: "https://management-a62a2.firebaseio.com",
+    projectId: "management-a62a2",
+    storageBucket: "management-a62a2.appspot.com",
+    messagingSenderId: "972960577898"
+  };
+  firebase.initializeApp(config);
+//..............................................................
+    var d = new Date();
+    var x = document.getElementById("demo");
+    var h = addZero(d.getHours());
+    
+    
+//grill kitchen
+if(h>=21 && h<23){
+var bigOne = document.getElementById('bigOne');
+  
+var dbRef = firebase.database().ref().child('text4');
+ dbRef.on('value',snap =>bigOne.innerText = snap.val());
+  }
+else if(h>=10 && h<15){
+
+      
+
+var bigOne = document.getElementById('bigOne');
+var dbRef = firebase.database().ref().child('text1');
+  
+dbRef.on('value',snap =>bigOne.innerText = snap.val());
+
+
+}
+else if(h>=15 && h<19){
+
+      
+
+var bigOne = document.getElementById('bigOne');
+var dbRef = firebase.database().ref().child('text2');
+  
+dbRef.on('value',snap =>bigOne.innerText = snap.val());
+
+
+}
+else if(h>=19 && h<21){
+
+      
+
+var bigOne = document.getElementById('bigOne');
+var dbRef = firebase.database().ref().child('text');
+  
+dbRef.on('value',snap =>bigOne.innerText = snap.val());
+
+
+}
+else{
+
+      
+
+var bigOne = document.getElementById('bigOne');
+var dbRef = firebase.database().ref().child('text3');
+  
+dbRef.on('value',snap =>bigOne.innerText = snap.val());
+
+
+}
+
+//dominios
+if(h>=21 && h<23){
+var bigTwo = document.getElementById('bigTwo');
+  
+var dbRef = firebase.database().ref().child('text');
+ dbRef.on('value',snap =>bigTwo.innerText = snap.val());
+  }
+else if(h>=10 && h<15){
+
+      
+
+var bigTwo = document.getElementById('bigTwo');
+var dbRef = firebase.database().ref().child('text4');
+  
+dbRef.on('value',snap =>bigTwo.innerText = snap.val());
+
+
+}
+else if(h>=15 && h<19){
+
+      
+
+var bigTwo = document.getElementById('bigTwo');
+var dbRef = firebase.database().ref().child('text2');
+  
+dbRef.on('value',snap =>bigTwo.innerText = snap.val());
+
+
+}
+else if(h>=19 && h<21){
+
+      
+
+var bigTwo = document.getElementById('bigTwo');
+var dbRef = firebase.database().ref().child('text');
+  
+dbRef.on('value',snap =>bigTwo.innerText = snap.val());
+
+
+}
+else{
+
+      
+
+var bigTwo = document.getElementById('bigTwo');
+var dbRef = firebase.database().ref().child('text3');
+  
+dbRef.on('value',snap =>bigTwo.innerText = snap.val());
+
+
+}
+
+
+// //poptos
+if(1===1){
+ var x = document.getElementById("xxx");
+var bigThree = document.getElementById('bigThree');
+  
+
+    var dbRef = firebase.database().ref().child('user_name');
+    
+    dbRef.on('value',function(snap){
+
+    	s  = snap.val()
+    	bigThree.innerHTML=s;
+    	if(s!=="No Waiting "){
+    		x.style.display = "block";
+    	}
+    	else{
+    		x.style.display = "none";
+    	}
+    });
+}
+ 
+//madhubhan
+if(h>=21 && h<23){
+var bigFour = document.getElementById('bigFour');
+  
+var dbRef = firebase.database().ref().child('text1');
+ dbRef.on('value',snap =>bigFour.innerText = snap.val());
+  }
+else if(h>=10 && h<15){
+
+      
+
+var bigFour = document.getElementById('bigFour');
+var dbRef = firebase.database().ref().child('text1');
+  
+dbRef.on('value',snap =>bigFour.innerText = snap.val());
+
+
+}
+else if(h>=15 && h<19){
+
+      
+
+var bigFour = document.getElementById('bigFour');
+var dbRef = firebase.database().ref().child('text2');
+  
+dbRef.on('value',snap =>bigFour.innerText = snap.val());
+
+
+}
+else if(h>=19 && h<21){
+
+      
+
+var bigFour = document.getElementById('bigFour');
+var dbRef = firebase.database().ref().child('text4');
+  
+dbRef.on('value',snap =>bigFour.innerText = snap.val());
+
+
+}
+else{
+
+      
+
+var bigFour = document.getElementById('bigFour');
+var dbRef = firebase.database().ref().child('text3');
+  
+dbRef.on('value',snap =>bigFour.innerText = snap.val());
+
+}
+
+if(h>=21 && h<23){
+var bigFive = document.getElementById('bigFive');
+  
+var dbRef = firebase.database().ref().child('text');
+ dbRef.on('value',snap =>bigFive.innerText = snap.val());
+	}
+else if(h>=10 && h<15){
+
+		  
+
+var bigFive = document.getElementById('bigFive');
+var dbRef = firebase.database().ref().child('text1');
+  
+dbRef.on('value',snap =>bigFive.innerText = snap.val());
+
+
+}
+else if(h>=15 && h<19){
+
+		  
+
+var bigFive = document.getElementById('bigFive');
+var dbRef = firebase.database().ref().child('text1');
+  
+dbRef.on('value',snap =>bigFive.innerText = snap.val());
+
+
+}
+else if(h>=19 && h<21){
+
+		  
+
+var bigFive = document.getElementById('bigFive');
+var dbRef = firebase.database().ref().child('text4');
+  
+dbRef.on('value',snap =>bigFive.innerText = snap.val());
+
+
+}
+else{
+
+		  
+
+var bigFive = document.getElementById('bigFive');
+var dbRef = firebase.database().ref().child('text1');
+  
+dbRef.on('value',snap =>bigFive.innerText = snap.val());
+
+
+}
+
+///dhosha.com//Six
+if(h>=21 && h<23){
+var bigSix = document.getElementById('bigSix');
+  
+var dbRef = firebase.database().ref().child('text4');
+ dbRef.on('value',snap =>bigSix.innerText = snap.val());
+	}
+else if(h>=10 && h<15){
+
+		  
+
+var bigSix = document.getElementById('bigSix');
+var dbRef = firebase.database().ref().child('text1');
+  
+dbRef.on('value',snap =>bigSix.innerText = snap.val());
+
+
+}
+else if(h>=15 && h<19){
+
+		  
+
+var bigSix = document.getElementById('bigSix');
+var dbRef = firebase.database().ref().child('text2');
+  
+dbRef.on('value',snap =>bigSix.innerText = snap.val());
+
+
+}
+else if(h>=19 && h<21){
+
+		  
+
+var bigSix = document.getElementById('bigSix');
+var dbRef = firebase.database().ref().child('text4');
+  
+dbRef.on('value',snap =>bigSix.innerText = snap.val());
+
+
+}
+else{
+
+		  
+
+var bigSix = document.getElementById('bigSix');
+var dbRef = firebase.database().ref().child('text3');
+  
+dbRef.on('value',snap =>bigSix.innerText = snap.val());
+
+
+}
+
+////pep-pizza///Seven
+if(h>=21 && h<23){
+var bigSeven = document.getElementById('bigSeven');
+  
+var dbRef = firebase.database().ref().child('text');
+ dbRef.on('value',snap =>bigSeven.innerText = snap.val());
+	}
+else if(h>=10 && h<15){
+
+		  
+
+var bigSeven = document.getElementById('bigSeven');
+var dbRef = firebase.database().ref().child('text4');
+  
+dbRef.on('value',snap =>bigSeven.innerText = snap.val());
+
+
+}
+else if(h>=15 && h<19){
+
+		  
+
+var bigSeven = document.getElementById('bigSeven');
+var dbRef = firebase.database().ref().child('text1');
+  
+dbRef.on('value',snap =>bigSeven.innerText = snap.val());
+
+
+}
+else if(h>=19 && h<21){
+
+		  
+
+var bigSeven = document.getElementById('bigSeven');
+var dbRef = firebase.database().ref().child('text');
+  
+dbRef.on('value',snap =>bigSeven.innerText = snap.val());
+
+
+}
+else{
+
+		  
+
+var bigSeven = document.getElementById('bigSeven');
+var dbRef = firebase.database().ref().child('text3');
+  
+dbRef.on('value',snap =>bigSeven.innerText = snap.val());
+
+
+}
+
+
+if(h>=21 && h<23){
+var bigEight = document.getElementById('bigEight');
+  
+var dbRef = firebase.database().ref().child('text4');
+ dbRef.on('value',snap =>bigEight.innerText = snap.val());
+	}
+else if(h>=10 && h<15){
+
+		  
+
+var bigEight= document.getElementById('bigEight');
+var dbRef = firebase.database().ref().child('text1');
+  
+dbRef.on('value',snap =>bigEight.innerText = snap.val());
+
+
+}
+else if(h>=15 && h<19){
+
+		  
+
+var bigEight = document.getElementById('bigEight');
+var dbRef = firebase.database().ref().child('text2');
+  
+dbRef.on('value',snap =>bigEight.innerText = snap.val());
+
+
+}
+else if(h>=19 && h<21){
+
+		  
+
+var bigEight = document.getElementById('bigEight');
+var dbRef = firebase.database().ref().child('text4');
+  
+dbRef.on('value',snap =>bigEight.innerText = snap.val());
+
+
+}
+else{
+
+		  
+
+var bigEight = document.getElementById('bigEight');
+var dbRef = firebase.database().ref().child('text3');
+  
+dbRef.on('value',snap =>bigEight.innerText = snap.val());
+
+
+}
+
+
+      
+
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+<script >
+  
+
+  particlesJS("particles-js", {"particles":{"number":{"value":400,"density":{"enable":true,"value_area":1000}},"color":{"value":"#fff"},"shape":{"type":"circle","stroke":{"width":0,"color":"#000000"},"polygon":{"nb_sides":5},"image":{"src":"img/github.svg","width":100,"height":100}},"opacity":{"value":0.5,"random":true,"anim":{"enable":false,"speed":1,"opacity_min":0.1,"sync":false}},"size":{"value":10,"random":true,"anim":{"enable":false,"speed":10,"size_min":0.1,"sync":false}},"line_linked":{"enable":false,"distance":500,"color":"#ffffff","opacity":0.4,"width":2},"move":{"enable":true,"speed":6,"direction":"bottom","random":false,"straight":false,"out_mode":"out","bounce":false,"attract":{"enable":false,"rotateX":600,"rotateY":1200}}},"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":true,"mode":"bubble"},"onclick":{"enable":true,"mode":"repulse"},"resize":true},"modes":{"grab":{"distance":400,"line_linked":{"opacity":0.5}},"bubble":{"distance":400,"size":4,"duration":0.3,"opacity":1,"speed":3},"repulse":{"distance":200,"duration":0.4},"push":{"particles_nb":4},"remove":{"particles_nb":2}}},"retina_detect":true});var count_particles, stats, update; stats = new Stats; stats.setMode(0); stats.domElement.style.position = 'absolute'; stats.domElement.style.left = '0px'; stats.domElement.style.top = '0px'; document.body.appendChild(stats.domElement); count_particles = document.querySelector('.js-count-particles'); update = function() { stats.begin(); stats.end(); if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) { count_particles.innerText = window.pJSDom[0].pJS.particles.array.length; } requestAnimationFrame(update); }; requestAnimationFrame(update);;
+
+</script>
+
+
+</body>
+</html>
